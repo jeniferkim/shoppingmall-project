@@ -1,5 +1,6 @@
 // 25.08.03 기준 개발 stop
 // 추후 디벨롭 예정
+// 안 만들어도 될 듯
 
 import { useSearchParams } from "react-router-dom";
 import ProductList from "../components/product/ProductList";

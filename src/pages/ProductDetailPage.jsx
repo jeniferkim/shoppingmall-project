@@ -20,7 +20,10 @@ export default function ProductDetailPage() {
   const [product, setProduct] = useState(location.state?.product || null);
   const [activeTab, setActiveTab] = useState("info"); // info | review
   const [reviews, setReviews] = useState([]);
-  const [loadingReview, setLoadingReview] = useState(false);
+  const [loadingReview, setLoadingReview] = useState(false); // 리뷰 로딩
+
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true); // 상품 로딩
   // const { addToCart } = useCart();
 
   
@@ -42,6 +45,9 @@ export default function ProductDetailPage() {
         setProduct(response.data);
       } catch (error) {
         console.error("상품 정보를 불러오는 데 실패했습니다:", error);
+        setError("해당 상품을 찾을 수 없습니다.");
+      } finally {
+        setLoading(false);
       }
     };
     fetchProduct();
@@ -78,7 +84,9 @@ export default function ProductDetailPage() {
 
 
   // 로딩 처리
-  if (!product) return <div>상품 정보를 불러오는 중...</div>;
+  if (loading) return <div>상품 정보를 불러오는 중...</div>;
+  if (error) return <div>{error}</div>;
+  if (!product) return <div>상품이 존재하지 않습니다.</div>;
 
 
   return (
