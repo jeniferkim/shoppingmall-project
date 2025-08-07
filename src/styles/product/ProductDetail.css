@@ -1,0 +1,181 @@
+/* 전체 컨테이너 */
+.product-detail-page {
+  /* padding: 2rem; */
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: var(--background);
+}
+
+/* 상품 상세 컨테이너 */
+.product-detail-container {
+  display: flex;
+  flex-wrap: wrap; /* 화면 좁으면 자동으로 세로로 전환 */
+  gap: 3rem; /* 이미지와 정보 사이 간격 */
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  /* 중앙 정렬 + 최대 폭 제한 29cm, Kream 다 똑같음 */
+  max-width: 1200px;
+  margin: 3rem auto; /* 화면 중앙 정렬 */
+
+  /* padding: 0 2rem; 좌우 기본 여백 (반응형 대응) 이녀석이 문제였음!!!! */
+
+  background-color: var(--background);
+}
+
+
+/* 상품 이미지 */
+.product-detail-container img.product-image {
+  flex: 1 1 0; /* 양쪽 1:1 비율 */
+  max-width: 47%; /* 부모의 절반까지만 */
+  /* width: 100px; */
+  height: auto;
+  aspect-ratio: 1 / 1; /* 정사각형 */
+  object-fit: contain;
+  background-color: var(--surface); /* 이미지 없을 때 대비 */
+  transition: transform 0.3s ease;
+}
+
+/* .product-image:hover {
+  transform: scale(1.03);
+} */
+
+.product-info {
+  flex: 1 1 0; /* 양쪽 1:1 비율 */
+  max-width: 50%; /* 부모의 절반까지만 */
+  background-color: #f7f7f7;
+  /* padding: 1rem 2rem;        정보 영역 내부 여백 이거 지금 bc 있어서 ㄱㅊ은데 나중에 넣어야할듯 */
+  box-sizing: border-box;
+}
+
+/* 상품명 */
+.product-info .product-name {
+  font-size: 1.5rem;      /* 상품명 크게 */
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+/* 가격 */
+.product-info .product-price {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* 할인율
+.product-info .product-discount {
+  font-size: 1rem;
+  color: #ff3b30;
+  font-weight: 500;
+} */
+
+/* 설명 */
+.product-info .product-description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-top: 0.5rem;
+}
+
+.product-info .product-button-wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.product-info .add-to-cart-button {
+  width: 100%;
+  padding: 0.7rem;
+  background-color: white;
+  color: black;
+  border: 0.2px solid var(--text-secondary);
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.9rem;
+  box-sizing: border-box;
+}
+
+.product-info .add-to-cart-button:hover {
+  background-color: #bdbdbd;
+}
+
+.product-info .buy-now-button {
+  width: 100%;
+  padding: 0.7rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.9rem;
+  box-sizing: border-box;
+}
+
+.product-info .buy-now-button:hover {
+  background-color: rgb(30, 30, 30);
+}
+
+
+
+/* 탭 버튼
+.product-tabs {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+  gap: 1rem;
+}
+
+.product-tabs button {
+  padding: 0.7rem 1.5rem;
+  border: 1px solid #ddd;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #555;
+  transition: all 0.2s ease;
+}
+
+.product-tabs button:hover {
+  background-color: #f1f7ff;
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.product-tabs button.active {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.2);
+}
+
+/* 탭 내용 
+.product-tab-content {
+  margin-top: 2rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  line-height: 1.6;
+} */
+
+.product-tabs {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  justify-content: center;
+
+}
+
+.tab-item {
+  padding: 1rem 2rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: #777;
+}
+
+.tab-item.active {
+  color: #000;
+  border-bottom: 2px solid #000;
+}

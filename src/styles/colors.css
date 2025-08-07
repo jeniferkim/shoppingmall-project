@@ -1,0 +1,19 @@
+:root {
+  /* 🎨 Primary Colors */
+  --primary: #FFD600;         /* 생동감 있는 옐로우 */
+  --secondary: #00C4CC;       /* 시원한 민트 */
+  --accent: #FF3B30;          /* 포인트 레드 */
+
+  /* 🏗 Background & Surface */
+  --background: white;      /* 메인 배경 */
+  --surface: #F7F7F7;         /* 카드/섹션 배경 */
+
+  /* 📝 Text Colors */
+  --text-primary: #111111;    /* 메인 텍스트 */
+  --text-secondary: #555555;  /* 서브 텍스트 */
+
+  /* 💡 Optional: Hover/Active States */
+  --primary-hover: #FFEB3B;   
+  --secondary-hover: #00A3AA;
+  --accent-hover: #FF5252;
+}

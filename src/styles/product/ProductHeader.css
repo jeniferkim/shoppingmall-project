@@ -1,0 +1,73 @@
+/* 헤더 */
+
+.product-header {
+  width: 100%;
+  height: 80px;
+  background-color: var(--background);
+  /* background-color: #f6f6f6; */
+
+  padding: 0.2rem 0.3rem; /* 13인치에서 적당한 높이 */
+  /* border-bottom: 1px solid #bababa; */
+
+  margin-bottom: 1.5rem;
+}
+
+/* 상단 로고/액션 영역 */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.logo img {
+  height: 115px; 
+  margin-top: -40px;
+  margin-left: -7px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-right: 35px;
+}
+
+.header-actions .header-search {
+  width: 200px;
+}
+
+/* 검색창 */
+.header-search input {
+  width: 100%;
+  padding: 0.4rem 0.7rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.header-search input::placeholder {
+  color: #999;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #646cffaa;    
+}
+
+
+/* 로그인, 장바구니 아이콘 */
+.header-actions img {
+  height: 22px; /* 로고 대비 적당한 비율 */
+  width: 22px;
+  margin-left: 0.8rem;
+  cursor: pointer;
+  object-fit: contain;
+  transition: transform 0.2s;
+}
+
+.header-actions img:hover {
+  transform: scale(1.05);
+}
+
+

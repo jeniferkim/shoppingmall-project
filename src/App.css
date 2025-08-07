@@ -1,0 +1,68 @@
+@import '/src/styles/colors.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: var(--background);
+  min-height: 100vh;
+  overflow-x: hidden; /* ✅ 수평 스크롤 제거 */
+  display: flex;
+  align-items: flex-start; /* 상단 정렬 */
+  justify-content: center; /* 가로 가운데 */
+}
+
+
+#root {
+  width: 100%;
+  /* max-width: 1024px;  */
+  margin: 0 auto;
+  padding: 0 1rem;
+  background: transparent;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@media (max-width: 768px) {
+  .product-card {
+    width: 100%;  /* 모바일에서는 한 줄 전체 차지 */
+  }
+
+  .header-actions img {
+    height: 22px;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+/* 공통 컨테이너 고민해보기*/ 
+.container {
+  width: 100%;
+  max-width: 1200px;  /* KREAM/무신사/29CM 패턴 */
+  margin: 0 auto;     /* 화면 중앙 정렬 */
+  box-sizing: border-box;
+}

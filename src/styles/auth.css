@@ -1,0 +1,112 @@
+/* Login.jsx, Signup.jsx 이 둘(인증)을 위한 스타일 */
+
+
+.login-container {
+  width: 100%;
+  max-width: 40%;
+  margin: 5rem auto;
+  padding: 2rem;
+  border: 1px solid #f4f4f4;
+  box-sizing: border-box;
+  background-color: var(--surface);
+}
+
+.login-container h1 {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.login-container p {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.input-field label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 15px;
+  
+}
+
+.input-field input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 12px;
+  box-sizing: border-box;
+  background-color: #f3f3f5;
+}
+
+/* 로그인 버튼 */
+.login-button {
+  width: 100%;
+  padding: 0.7rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.9rem;
+  box-sizing: border-box;
+}
+
+.login-button:hover {
+  background-color: rgb(30, 30, 30);
+}
+
+
+/* 메인 카드 형태 */
+.signup-container {
+  width: 100%;
+  max-width: 40%;
+  margin: 3rem auto;
+  padding: 3rem 2rem;
+  box-sizing: border-box;
+  background-color: var(--surface);
+}
+
+/* 제목 */
+.signup-container h1 {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* 인풋 필드 래퍼 */
+.singupList-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem; /* 각 필드 사이 간격 */
+}
+
+/* 회원가입 버튼 */
+.signup-button {
+  width: 100%;
+  padding: 0.7rem;
+  background-color: white;
+  color: black;
+  border: 0.2px solid var(--text-secondary);
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.9rem;
+  box-sizing: border-box;
+}
+
+.signup-button:hover {
+  background-color: #bdbdbd;
+}
+
+
