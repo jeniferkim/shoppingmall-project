@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 
 import ProductList from "../components/product/ProductList";
 import ProductHeader from "../components/product/ProductHeader";
@@ -9,7 +9,8 @@ import { sampleProducts } from "../data/products";
 
 import '../styles/product/ProductMainPage.css';
 
-const API_BASE_URL = "https://port-8080-shoppingmall-mdsn9zf153ba9c89.sel5.cloudtype.app";
+// 백엔드 연결 시 주석 풀기
+// const API_BASE_URL = "https://port-8080-shoppingmall-mdsn9zf153ba9c89.sel5.cloudtype.app";
 
 function ProductMainPage() {
 
@@ -24,8 +25,12 @@ function ProductMainPage() {
 
   useEffect(() => {
 
-    // setProducts(sampleProducts);
+    // 1. 프론트만
+    setProducts(sampleProducts);
+    setLoading(false);
 
+    // 2. 백엔드 연동 시 주석 풀기
+    /*
     const fetchProducts = async () => {
       try {
         const response = await axios.get("/api/products");
@@ -44,7 +49,7 @@ function ProductMainPage() {
       }
     };
 
-    fetchProducts();
+    fetchProducts(); */
   }, []);
 
   if (loading) return <div>상품을 불러오는 중...</div>;
@@ -55,22 +60,26 @@ function ProductMainPage() {
       <ProductHeader onSearchChange={setSearchTerm} />
 
       <div className="product-grid">
-      {filteredProducts.map(p => (
-        <div className="product-card" 
-          key={p.id}
-          onClick={() => navigate(`/product/${p.id}`)}
-          style={{cursor: "pointer"}}
-        >
-          <div className="product-image-wrapper">
-            <img className="product-image" src={p.imageUrl} alt={p.name} />
-          </div>
-          <div className="product-brand">{p.brand}</div>
-          <div className="product-name">{p.name}</div>
-          <div className="product-price">
-            ₩{p.price.toLocaleString()}
-          </div>
-        </div>
-      ))}
+        {filteredProducts.length === 0 ? (
+          <div className="no-results-message">검색 결과가 없습니다.</div>
+        ) : (
+          filteredProducts.map(p => (
+            <div className="product-card" 
+              key={p.id}
+              onClick={() => navigate(`/product/${p.id}`)}
+              style={{cursor: "pointer"}}
+            >
+              <div className="product-image-wrapper">
+                <img className="product-image" src={p.imageUrl} alt={p.name} />
+              </div>
+              <div className="product-brand">{p.brand}</div>
+              <div className="product-name">{p.name}</div>
+              <div className="product-price">
+                ₩{p.price.toLocaleString()}
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

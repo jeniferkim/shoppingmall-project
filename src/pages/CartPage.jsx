@@ -1,5 +1,6 @@
 // 장바구니 페이지 전체 UI
 // CartItem을 여러 개 렌더링 + 합계 금액 + 결제 버튼 표시
+// cartItems.map() 으로 CartUtem 여러 개 렌더링
 
 
 import React from "react";

@@ -1,5 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -10,7 +9,9 @@ import CartPage from './pages/CartPage';
 
 import './styles/colors.css';
 import './App.css';
+
 import { CartProvider } from './context/CartProvider';
+import { AuthProvider } from './context/AuthContext';
 
 
 function App() {
@@ -18,19 +19,30 @@ function App() {
 
   return (
     <>
-    <CartProvider>
-      <div className="App">
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/" element={<ProductMainPage />} />
-          <Route path="/productsearch" element={<ProductSearchPage />} />
-          <Route path="/product/:id" element={<ProductDetailPage />} />
-          <Route path="/cart" element={<CartPage />} />
-
-        </Routes>
-      </div>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        {/* CartProvider로 감싸서 상태가 전역으로 공유되도록 설정 */}
+        <BrowserRouter>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<ProductMainPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/productsearch" element={<ProductSearchPage />} />
+            <Route path="/product/:id" element={<ProductDetailPage />} />
+            <Route 
+              path="/cart" 
+              element={
+                <ProtectedRoute>
+                  <CartPage />
+                </ProtectedRoute>
+              } 
+            />
+          </Routes>
+        </div>
+        </BrowserRouter>
+      </CartProvider>
+    </AuthProvider>
     </>
   );
 }

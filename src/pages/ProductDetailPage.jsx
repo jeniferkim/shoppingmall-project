@@ -29,12 +29,16 @@ export default function ProductDetailPage() {
   
   useEffect(() => {
     // 1️⃣ state에 상품 정보가 있으면 그대로 사용
-    if (product) return;
+    if (product) {
+      setLoading(false);
+      return;
+    }
 
     // 2️⃣ state가 없으면 임시 데이터에서 찾기
     const localProduct = sampleProducts.find(p => p.id === Number(id));
     if (localProduct) {
       setProduct(localProduct);
+      setLoading(false);
       return;
     }
 

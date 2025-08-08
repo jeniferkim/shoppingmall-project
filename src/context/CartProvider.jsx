@@ -1,3 +1,6 @@
+// 전역 상태를 제공 (CartItems, addToCart 등)
+// 장바구니 상태를 확인, Context로 전역 전달하는 최상단공급자
+
 import { useState, useEffect } from "react";
 import { CartContext } from "./CartContext";
 
@@ -26,7 +29,7 @@ export const CartProvider = ({ children }) => {
             );
         } else {
             // 새 상품 추가
-            return [...prev, { ...product, quantity: 1 }];
+            return [...prev, { ...product, quantity: product.quantity || 1 }]; // 외부에서 quantity가 없는 product를 넘겨줄 수도 있으니까?
         }
     });
   };
