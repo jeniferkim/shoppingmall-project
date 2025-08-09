@@ -12,10 +12,8 @@ import { useCart } from "../context/useCart";
 const CartPage = () => {
   const { cartItems, updateQuantity, removeFromCart } = useCart();
 
-  const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  const lineTotal = (item) => item.price * item.quantity;
+  const totalPrice = cartItems.reduce((acc, item) => acc + lineTotal(item), 0);
 
   const handleCheckout = () => {
     alert("결제를 진행합니다!");
@@ -25,35 +23,70 @@ const CartPage = () => {
     <>
     <ProductHeader />
     <div className="cart-page">
-
       <h1 className="cart-title">Shopping Cart</h1>
-      <div className="cart-container">
+
+      <div className="cart-container"> {/* 좌우 2단 레이아웃 -> 목록 / 결제 */}
         {/* Left: Cart Items */}
         <div className="cart-items">
-          {cartItems.length > 0 ? (
-            <>
-            {/* 테이블 헤더 */}
-            <div className="cart-header">
-              <span className="header-product">Product</span>
-              <span className="header-quantity">Quantity</span>
-              <span className="header-total">Total Price</span>
+          {/* 헤더 */}
+            <div className="cart-grid cart-header">
+              <span>Product</span>
+              <span>Quantity</span>
+              <span>Total Price</span>
             </div>
-            {/* 장바구니 아이템 */}
-            {cartItems.map(item => (
-              <CartItem
-                key={item.id}
-                item={item}
-                onQuantityChange={updateQuantity} // Context 함수 사용
-                onRemove={removeFromCart} // Context 함수 사용
-            />
-            ))}
-          </>
-          ) : (
-            <p className="empty-text">장바구니가 비어 있습니다.</p>
-          )}
+
+            {cartItems.length > 0 ? (
+              cartItems.map((item) => (
+                <div key={item.id} className="cart-grid cart-row">
+                  {/* Product cell */}
+                  <div className="product-cell">
+                    <img
+                      className="thumb"
+                      src={item.imageUrl || item.image}
+                      alt={item.name}
+                    />
+                    <div className="info">
+                      <div className="name">{item.name}</div>
+                      {item.option && <div className="meta">{item.option}</div>}
+                    </div>
+                  </div>
+
+                  {/* Quantity cell */}
+                  <div className="qty-cell">
+                    <button
+                      onClick={() =>
+                        updateQuantity(item.id, Math.max(1, item.quantity - 1))
+                      }
+                    >
+                      −
+                    </button>
+                    <span className="qty">{item.quantity}</span>
+                    <button
+                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  {/* Price cell */}
+                  <div className="price-cell">
+                    <span>{lineTotal(item).toLocaleString()}원</span>
+                    <button
+                      className="remove"
+                      aria-label="remove item"
+                      onClick={() => removeFromCart(item.id)}
+                    >
+                      ×
+                    </button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="empty">장바구니가 비어 있어요.</div>
+            )}
         </div>
 
-        {/* Right: Summary / Payment Info */}
+        {/*Right: Summary / Payment Info */}
         <div className="cart-summary">
           <h2>결제 수단</h2>
           <div className="payment-method">
@@ -87,6 +120,8 @@ const CartPage = () => {
             결제하기
           </button>
         </div>
+
+        
       </div>
     </div>
   </>

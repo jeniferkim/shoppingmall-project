@@ -12,6 +12,7 @@ import './App.css';
 
 import { CartProvider } from './context/CartProvider';
 import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 
 function App() {
@@ -22,7 +23,6 @@ function App() {
     <AuthProvider>
       <CartProvider>
         {/* CartProvider로 감싸서 상태가 전역으로 공유되도록 설정 */}
-        <BrowserRouter>
         <div className="App">
           <Routes>
             <Route path="/" element={<ProductMainPage />} />
@@ -40,7 +40,6 @@ function App() {
             />
           </Routes>
         </div>
-        </BrowserRouter>
       </CartProvider>
     </AuthProvider>
     </>
