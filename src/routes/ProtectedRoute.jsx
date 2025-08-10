@@ -1,12 +1,9 @@
-// src/routes/ProtectedRoute.jsx
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-const ProtectedRoute = ({ children }) => {
-  const { isLoggedIn } = useAuth();
+export default function ProtectedRoute () {
+  const { isAuthenticated } = useAuth();
 
   // 로그인 안 되어 있으면 로그인 페이지로 리다이렉트
-  return isLoggedIn ? children : <Navigate to="/login" />;
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 };
-
-export default ProtectedRoute;
