@@ -17,8 +17,10 @@ import { sampleReviews } from "../data/reviews";
 export default function ProductDetailPage() {
   const { id } = useParams();
   const location = useLocation();
+
   const [product, setProduct] = useState(location.state?.product || null);
   const [activeTab, setActiveTab] = useState("info"); // info | review
+
   const [reviews, setReviews] = useState([]);
   const [loadingReview, setLoadingReview] = useState(false); // 리뷰 로딩
 
@@ -55,14 +57,18 @@ export default function ProductDetailPage() {
       }
     };
     fetchProduct();
-  }, [id, product]);
-
+  }, [id, product]); /* 나중에 확인. Prduct 의존성을 없애야 된다나 뭐라나 */
   // 리뷰 로드 (탭 전환 시)
   useEffect(() => {
     if (activeTab !== "review") return;
 
     setLoadingReview(true);
 
+
+    // ✅ 샘플 리뷰에서 현재 상품에 맞는 리뷰만 필터링
+    setReviews(sampleReviews.filter(
+      (r) => String(r.productId) === String(id)
+    ));
 
     // 임시 데이터 먼저 세팅
     setReviews(sampleReviews);
