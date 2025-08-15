@@ -15,7 +15,7 @@
 
   /* 중앙 정렬 + 최대 폭 제한 29cm, Kream 다 똑같음 */
   max-width: 1200px;
-  margin: 3rem auto; /* 화면 중앙 정렬 */
+  margin: 0.5rem auto; /* 화면 중앙 정렬 */
 
   /* padding: 0 2rem; 좌우 기본 여백 (반응형 대응) 이녀석이 문제였음!!!! */
 
@@ -190,4 +190,8 @@
 .tab-item.active {
   color: #000;
   border-bottom: 2px solid #000;
+}
+
+.tab-content {
+  padding: 2rem 0.3rem 10rem 2rem;
 }

@@ -4,10 +4,10 @@ import ProductReviewItem from "./ProductReviewItem";
 import StarRating from "../review/StarRating";
 import "../../styles/review/review.css";
 
-function DistBar({ label, value, total, onClick }) {
+function DistBar({ label, value, total, onClick, active }) {
   const pct = total ? Math.round((value / total) * 100) : 0;
   return (
-    <button className="dist" onClick={onClick}>
+    <button className={`dist ${active ? "active" : ""}`} onClick={onClick}>
       <span className="dist__label">{label}</span>
       <span className="dist__bar">
         <span className="dist__bar__fill" style={{ width: `${pct}%` }} />
@@ -17,26 +17,94 @@ function DistBar({ label, value, total, onClick }) {
   );
 }
 
+/** 상단 사진 스트립 */
+function ReviewPhotoStrip({ photos, onOpen }) {
+  if (!photos.length) return null;
+
+  const top = photos.slice(0, 5);
+  const rest = photos.length - top.length;
+
+  return (
+    <div className="photo-strip card">
+      <div className="photo-strip__title">리뷰 사진</div>
+      <div className="photo-strip__row">
+        {top.map((p, i) => {
+          const isLast = i === top.length - 1 && rest > 0;
+          return (
+            <button
+              key={`${p.rid}-${p.idx}`}
+              className={`photo-tile ${isLast ? "more" : ""}`}
+              onClick={() => onOpen(i)}
+              aria-label="리뷰 사진 보기"
+            >
+              <img src={p.src} alt={`리뷰 사진 ${i + 1}`} loading="lazy" />
+              {isLast && (
+                <span className="photo-tile__more">
+                  더보기<br />+{rest}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/** 아주 심플한 라이트박스(모달) */
+function Lightbox({ open, photos, index, onClose, onPrev, onNext }) {
+  if (!open) return null;
+  const cur = photos[index];
+  return (
+    <div className="lightbox" onClick={onClose}>
+      <div className="lightbox__inner" onClick={(e) => e.stopPropagation()}>
+        <img src={cur?.src} alt="리뷰 큰 이미지" />
+        <div className="lightbox__ctrl">
+          <button onClick={onPrev} aria-label="이전">‹</button>
+          <span>{index + 1}/{photos.length}</span>
+          <button onClick={onNext} aria-label="다음">›</button>
+        </div>
+        <button className="lightbox__close" onClick={onClose} aria-label="닫기">✕</button>
+      </div>
+    </div>
+  );
+}
+
 export default function ProductReviewList({ reviews = [] }) {
   const [sort, setSort] = useState("recent");
   const [filter, setFilter] = useState(0);
   const [query, setQuery] = useState("");
+
+  // 사진 모달 상태
+  const [lbOpen, setLbOpen] = useState(false);
+  const [lbIndex, setLbIndex] = useState(0);
 
   const summary = useMemo(() => {
     if (!reviews.length) return { avg: 0, counts: [0, 0, 0, 0, 0], total: 0 };
     const counts = [0, 0, 0, 0, 0];
     let sum = 0;
     reviews.forEach((r) => {
-      const v = Math.round(r.rating ?? 0);
-      sum += r.rating ?? 0;
-      const idx = Math.max(1, Math.min(5, v));
-      counts[5 - idx] += 1;
+      const rating = Number(r.rating ?? 0);
+      sum += rating;
+      const v = Math.max(1, Math.min(5, Math.round(rating)));
+      counts[5 - v] += 1;
     });
     return {
       avg: Math.round((sum / reviews.length) * 10) / 10,
       counts,
       total: reviews.length,
     };
+  }, [reviews]);
+
+  // 상단 사진 스트립용 사진 풀(flat)
+  const photos = useMemo(() => {
+    const arr = [];
+    reviews.forEach((r) => {
+      (r.images || []).forEach((src, idx) => {
+        arr.push({ src, rid: r.id, idx });
+      });
+    });
+    return arr;
   }, [reviews]);
 
   const filtered = useMemo(() => {
@@ -56,8 +124,25 @@ export default function ProductReviewList({ reviews = [] }) {
     return arr;
   }, [reviews, sort, filter, query]);
 
+  const openLightbox = (i) => {
+    setLbIndex(i);
+    setLbOpen(true);
+  };
+
   return (
     <section className="review">
+      {/* 1. 사진 스트립 */}
+      <ReviewPhotoStrip photos={photos} onOpen={openLightbox} />
+      <Lightbox
+        open={lbOpen}
+        photos={photos}
+        index={lbIndex}
+        onClose={() => setLbOpen(false)}
+        onPrev={() => setLbIndex((i) => (i - 1 + photos.length) % photos.length)}
+        onNext={() => setLbIndex((i) => (i + 1) % photos.length)}
+      />
+
+      {/* 2. 요약/분포 */}
       <div className="review__summary card">
         <div className="summary__left">
           <div className="summary__avg">
@@ -65,7 +150,7 @@ export default function ProductReviewList({ reviews = [] }) {
             <span className="summary__total">/ 5</span>
           </div>
           <StarRating value={summary.avg} size={20} />
-          <div className="summary__count">{summary.total}개의 후기</div>
+          <div className="summary__count">리뷰 {summary.total}개</div>
         </div>
 
         <div className="summary__dist">
@@ -75,6 +160,7 @@ export default function ProductReviewList({ reviews = [] }) {
               label={`${score}점`}
               value={summary.counts[idx]}
               total={summary.total}
+              active={filter === score}
               onClick={() => setFilter(score === filter ? 0 : score)}
             />
           ))}
@@ -112,6 +198,7 @@ export default function ProductReviewList({ reviews = [] }) {
         </div>
       </div>
 
+      {/* 3. 리스트 */}
       <div className="review__list">
         {filtered.length === 0 ? (
           <div className="empty card">조건에 맞는 후기가 없습니다.</div>
@@ -121,4 +208,5 @@ export default function ProductReviewList({ reviews = [] }) {
       </div>
     </section>
   );
+
 }

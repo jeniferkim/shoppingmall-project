@@ -36,15 +36,10 @@ function App() {
             <Route path="/productsearch" element={<ProductSearchPage />} />
             <Route path="/product/:id" element={<ProductDetailPage />} />
 
-            {/* 로그인 필요 */}
-            <Route 
-              path="/cart" 
-              element={
-                <ProtectedRoute>
-                  <CartPage />
-                </ProtectedRoute>
-              } 
-            />
+            {/* 로그인 필요. 보호 라우터 여기다가 넣어야됨*/}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/cart" element={<CartPage />} />
+            </Route>
 
             {/* 관리자만 */}
             <Route path="/admin" element={<AdminRoute />}>
