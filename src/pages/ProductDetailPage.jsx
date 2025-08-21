@@ -131,7 +131,8 @@ export default function ProductDetailPage() {
           loadingReview ? (
             <div>리뷰 불러오는 중...</div>
           ) : (
-            <ProductReviewList productId={product.id} reviews={reviews} />
+            // <ProductReviewList productId={product.id} reviews={reviews} />
+            <ProductReviewList reviews={sampleReviews} />
           )
         )}
       {/* </div> */}

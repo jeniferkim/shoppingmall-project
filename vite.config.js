@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
       proxy: {
         '/api': {
-          target: 'https://port-8080-shoppingmall-mdsn9zf153ba9c89.sel5.cloudtype.app',
+          target: 'https://localhost:8080',
           changeOrigin: true,
           secure: false,
         },
