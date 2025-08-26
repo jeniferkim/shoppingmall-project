@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import axios from "axios";
+// import axios from "axios"; // 백엔드 연동 시 주석 해제
 
 import ProductList from "../components/product/ProductList";
 import ProductHeader from "../components/product/ProductHeader";

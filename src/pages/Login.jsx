@@ -3,7 +3,7 @@ import InputField from '../components/InputField';
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
 import '../styles/auth.css';
-import '/src/styles/colors.css';
+import '@/styles/colors.css';
 // import axios from 'axios';
 
 import { useAuth } from "../context/AuthContext";
@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 function Login() {
   const [id, setId] = useState('');
   const [pwd, setPwd] = useState('');
-  const { login } = useAuth(); // ✅ AuthContext에서 login 함수 사용
+  const { login } = useAuth(); // AuthContext에서 login 함수 사용
   const navigate = useNavigate();
 
 

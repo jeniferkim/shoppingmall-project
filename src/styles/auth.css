@@ -96,8 +96,8 @@
 .signup-button {
   width: 100%;
   padding: 0.7rem;
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: white;
   border: 0.2px solid var(--text-secondary);
   border-radius: 6px;
   cursor: pointer;

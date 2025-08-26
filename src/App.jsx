@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -14,11 +14,12 @@ import { CartProvider } from './context/CartProvider';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './routes/ProtectedRoute';
 
-import AdminRoute from "./routes/AdminRoute";
-import AdminLayout from "./pages/admin/AdminLayout";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminProducts from "./pages/admin/AdminProducts";
-import AdminProductForm from './pages/admin/AdminProductForm';
+// 관리자 기능 추후 디벨롭
+// import AdminRoute from "./routes/AdminRoute";
+// import AdminLayout from "./pages/admin/AdminLayout";
+// import AdminDashboard from "./pages/admin/AdminDashboard";
+// import AdminProducts from "./pages/admin/AdminProducts";
+// import AdminProductForm from './pages/admin/AdminProductForm';
 
 function App() {
 
@@ -41,16 +42,16 @@ function App() {
               <Route path="/cart" element={<CartPage />} />
             </Route>
 
-            {/* 관리자만 */}
-            <Route path="/admin" element={<AdminRoute />}>
+            {/* 관리자(Admin). 추후 확장 */}
+            {/* <Route path="/admin" element={<AdminRoute />}>
               <Route element={<AdminLayout />}>
                 <Route index element={<AdminDashboard />} />
                 <Route path="products" element={<AdminProducts />} />
                 <Route path="products/new" element={<AdminProductForm />} />
                 <Route path="products/:id/edit" element={<AdminProductForm />} />
-                {/* 추후 orders, users 등 확장 */}
+                {/* 추후 orders, users 등 확장 
               </Route>
-            </Route>
+            </Route> */}
           </Routes>
         </div>
       </CartProvider>

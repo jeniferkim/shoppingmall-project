@@ -38,7 +38,12 @@ function Signup() {
               placeholder="010-1234-5678"
             />      
         </div>
-        <Button className="signup-button" text="가입하기" onClick={() => console.log("가입 요청")} />
+        <Button 
+          className="signup-button" 
+          text="가입하기" 
+          onClick={() => // TODO: 회원가입 API 연동 (백엔드 연결 시)
+            console.log("가입 요청")} 
+        />
     </div>
     </>
   );

@@ -1,6 +1,6 @@
 import { useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios"; // 백엔드 연동 시 주석 해제
 
 import ProductHeader from "../components/product/ProductHeader";
 import ProductInfo from "../components/product/ProductInfo.jsx"; 
@@ -30,13 +30,13 @@ export default function ProductDetailPage() {
 
   
   useEffect(() => {
-    // 1️⃣ state에 상품 정보가 있으면 그대로 사용
+    // 1. state에 상품 정보가 있으면 그대로 사용
     if (product) {
       setLoading(false);
       return;
     }
 
-    // 2️⃣ state가 없으면 임시 데이터에서 찾기
+    // 2. state가 없으면 임시 데이터에서 찾기
     const localProduct = sampleProducts.find(p => p.id === Number(id));
     if (localProduct) {
       setProduct(localProduct);
@@ -44,7 +44,8 @@ export default function ProductDetailPage() {
       return;
     }
 
-    // 3️⃣ (백엔드 연동 후) API로 상품 정보 가져오기
+    // 3. (백엔드 연동 후) API로 상품 정보 가져오기
+    /*
     const fetchProduct = async () => {
       try {
         const response = await axios.get(`/api/products/${id}`);
@@ -56,8 +57,9 @@ export default function ProductDetailPage() {
         setLoading(false);
       }
     };
-    fetchProduct();
+    fetchProduct(); */
   }, [id, product]); /* 나중에 확인. Prduct 의존성을 없애야 된다나 뭐라나 */
+
   // 리뷰 로드 (탭 전환 시)
   useEffect(() => {
     if (activeTab !== "review") return;
@@ -65,7 +67,7 @@ export default function ProductDetailPage() {
     setLoadingReview(true);
 
 
-    // ✅ 샘플 리뷰에서 현재 상품에 맞는 리뷰만 필터링
+    // 샘플 리뷰에서 현재 상품에 맞는 리뷰만 필터링
     setReviews(sampleReviews.filter(
       (r) => String(r.productId) === String(id)
     ));
