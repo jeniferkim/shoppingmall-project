@@ -14,5 +14,8 @@
 - **리뷰 조회**: 별점, 후기 UI 컴포넌트 포함
 
 ## 페이지 별 로직
+메인 페이지
+https://github.com/jeniferkim/shoppingmall-project/issues/1#issue-3353815683
+
 로그인/회원가입 페이지
 
