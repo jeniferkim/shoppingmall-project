@@ -1,6 +1,15 @@
 # swicy
 > React + Spring Boot 기반의 온라인 쇼핑몰 프로젝트
 
+## 제작 기간
+- 2025.07.30 -
+
+## 팀원
+|김지원|민차현|
+|:---:|:---:|
+|FE|BE|
+
+
 ## 개발 환경
 - Front : React (Vite), React Router, Axios, Context API
 - Back-end : Spring Boot, Swagger API
